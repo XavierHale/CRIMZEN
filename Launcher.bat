@@ -32,9 +32,9 @@ pause
 :setup
 cd Reg
 if exist setup.txt ( 
-  goto :setup
+  goto :launch
   ) else (
-    goto :launch
+    goto :setup
   )
 :setup
 echo Setup has detected this is a new installation of Crimzen, so it will guide you throught the setup process
@@ -50,11 +50,30 @@ echo 5	=	Purple	 	D	=	Light Purple
 echo 6	=	Yellow	 	E	=	Light Yellow
 echo 7	=	White	 	F	=	Bright White
 set /p setcolor=
-%setcolor%>>color.txt
 timeout 1 /nobreak >nul
-
-
-
+echo What would you like your username to be?
+set /p setuser=
+echo That is setup done, would you like to:
+echo (1)Save and launch Crimzen
+echo (2)Save and exit 
+echo (3)Exit without saving
+set /p setchoice1=
+if %setchoice1%==1 goto :savelaunch
+if %setchoice1%==2 goto :saveandexit
+if %setchoice1%==3 goto :eof
+:saveandexit
+%setcolor%>>color.txt
+%setuser%>>user.txt
+goto :eof
+:savelaunch
+%setcolor%>>color.txt
+%setuser%>>user.txt
+cd..
+:launch
+cd..
+cd Sys
+start CRIMZEN.bat 
+goto :eof
 
 
 
