@@ -31,11 +31,29 @@ echo.
 pause
 :setup
 cd Reg
-set /p isconfig=<Setup.txt
-if %isconfig%==true goto :load
+if exist setup.txt ( 
+  goto :setup
+  ) else (
+    goto :launch
+  )
 :setup
 echo Setup has detected this is a new installation of Crimzen, so it will guide you throught the setup process
 pause
+echo What color would you like the default theme to be? Use the table below. The first digit or leter is background,
+echo second is foreground. (Ex, for a white background and blue text, enter 71)
+echo 0	=	Black	 	8	=	Gray
+echo 1	=	Blue	 	9	=	Light Blue
+echo 2	=	Green	 	A	=	Light Green
+echo 3	=	Aqua	 	B	=	Light Aqua
+echo 4	=	Red	 	    C	=	Light Red
+echo 5	=	Purple	 	D	=	Light Purple
+echo 6	=	Yellow	 	E	=	Light Yellow
+echo 7	=	White	 	F	=	Bright White
+set /p setcolor=
+%setcolor%>>color.txt
+timeout 1 /nobreak >nul
+
+
 
 
 
